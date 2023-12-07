@@ -18,7 +18,7 @@ const listMovies = async (genreId) => {
     const response = await api.get('discover/movie', {
         params: {
             with_genres: genreId,
-            language: 'pt-BR',
+            language: 'en-US',
             with_people: "212208"
         }
     });
@@ -30,6 +30,8 @@ function getGenreName(id) {
     const genero = genres.value.find((genre) => genre.id === id);
     return genero.name;
   }
+
+
 </script>
 <template clas="babe">
     <h1 class="title-movie">Movies</h1>
@@ -65,6 +67,11 @@ function getGenreName(id) {
 <style scoped>
 .babe{
   background-color: #9f97db;
+}
+
+.movie-release-date{
+  color: rgb(94, 1, 122);
+
 }
 .title-movie{
   color: rgb(129, 3, 3);
@@ -103,17 +110,16 @@ function getGenreName(id) {
 .movie-card {
   width: 16.3rem;
   height: 30rem;
-  border-radius: 0.2rem;
-  overflow: hidden;
-  
   background-color: #9f97db;
+  margin-left: 0,3rem;
+  
 }
 
 .movie-card img {
-  width: 100%;
+  width: 99%;
   height: 20rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 0 0.5rem #000;
+  box-shadow: 0 0 0.3rem purple;
+
 }
 
 .movie-details {
@@ -125,6 +131,7 @@ function getGenreName(id) {
   font-weight: bold;
   line-height: 1.3rem;
   height: 3.2rem;
+  color:  rgb(94, 1, 122);
 }
 
 .movie-genres {
@@ -147,7 +154,7 @@ function getGenreName(id) {
 
 .movie-genres span:hover {
   cursor: pointer;
-  background-color: #455a08;
-  box-shadow: 0 0 0.5rem #748708;
+  background-color: #13759c;
+  box-shadow: 0 0 0.5rem #024763;
 }
 </style>

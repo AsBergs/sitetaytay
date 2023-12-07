@@ -24,7 +24,7 @@ const listtvshows = async (genreId) => {
 </script>
 
 <template>
-    <h1>Programas de TV</h1>
+    <h1 class="title-bitch">TV Shows</h1>
     <ul class="genre-list">
       <li v-for="genre in genres" :key="genre.id" class="genre-item">
           {{ genre.name }}
@@ -47,7 +47,12 @@ const listtvshows = async (genreId) => {
   </template>
   
   <style scoped>
-  .genre-list {
+
+.title-bitch{
+  color: rgb(129, 3, 3);
+}
+
+.genre-list {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -57,8 +62,7 @@ const listtvshows = async (genreId) => {
   }
   
   .genre-item {
-    background-color: #5d6424;
-    border-radius: 1rem;
+    background-color: #9f97db;
     padding: 0.5rem 1rem;
     align-self: center;
     color: #fff;
@@ -68,8 +72,8 @@ const listtvshows = async (genreId) => {
   
   .genre-item:hover {
     cursor: pointer;
-    background-color: #7d8a2e;
-    box-shadow: 0 0 0.5rem #5d6424;
+    background-color: #9f97db;
+    box-shadow: 0 0 0.5rem #716aa5;
   }
 
   .tvshow-list {
