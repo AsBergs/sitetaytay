@@ -1,11 +1,12 @@
-import './assets/main.css'
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
+import 'vue-loading-overlay/dist/css/index.css';
 
-const app = createApp(App)
-app.use(router)
 
-app.mount('#app')
+import { createApp } from 'vue';
+import { createPinia } from 'pinia';
+import App from './App.vue';
+import router from './router';
+const app = createApp(App);
+app.use(router);
+app.use(createPinia());
 
-import 'vue-loading-overlay/dist/css/index.css'
+app.mount('#app');

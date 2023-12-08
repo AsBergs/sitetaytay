@@ -2,15 +2,19 @@
 import { ref, onMounted } from 'vue'
 import api from '@/plugins/axios'
 import Loading from 'vue-loading-overlay'
+import useGenreStore from '@/stores/genre';
 
 const genres = ref([])
 const isLoading = ref(false)
 const movies = ref([]);
+const genreStore = useGenreStore();
 
 onMounted(async () => {
-  const response = await api.get('genre/movie/list?language=pt-BR')
-  genres.value = response.data.genres
-})
+  isLoading.value = true;
+  await genreStore.getAllGenres('movie');
+  isLoading.value = false;
+});
+
 
 
 const listMovies = async (genreId) => {
@@ -18,8 +22,8 @@ const listMovies = async (genreId) => {
     const response = await api.get('discover/movie', {
         params: {
             with_genres: genreId,
-            language: 'en-US',
-            with_people: "212208"
+            language: 'en-USA'
+            
         }
     });
     movies.value = response.data.results
@@ -30,15 +34,30 @@ function getGenreName(id) {
     const genero = genres.value.find((genre) => genre.id === id);
     return genero.name;
   }
+  
+
 
 
 </script>
 <template clas="babe">
     <h1 class="title-movie">Movies</h1>
     <ul class="genre-list">
-      <li v-for="genre in genres" :key="genre.id" @click="listMovies(genre.id)" class="genre-item">
-          {{ genre.name }}
-     </li> 
+      <li
+  v-for="genre in genreStore.genres"
+  :key="genre.id"
+  @click="listMovies(genre.id)"
+  class="genre-item"
+>
+   {{ genre.name }} 
+</li>
+<span
+  v-for="genre_id in movie.genre_ids"
+  :key="genre_id"
+  @click="listMovies(genre_id)"
+>
+  {{ genreStore.getGenreName(genre_id) }}
+</span>
+
     
     </ul>
     <loading v-model:active="isLoading" is-full-page />
@@ -65,16 +84,14 @@ function getGenreName(id) {
   </template>
 
 <style scoped>
-.babe{
-  background-color: #9f97db;
-}
+
 
 .movie-release-date{
-  color: rgb(94, 1, 122);
+  color: #00635A;
 
 }
 .title-movie{
-  color: rgb(129, 3, 3);
+  color: #00635A;
   font-family: fantasy;
   
 }
@@ -88,17 +105,17 @@ function getGenreName(id) {
 }
 
 .genre-item {
-  background-color: #45abd3;
+  background-color: #44E3D3;
   border-width: 1rem;
-  border-color: #126fe9;
+  border-color: #32A89C;
   padding: 0.5rem 1rem;
   color: #fff;
 }
 
 .genre-item:hover {
   cursor: pointer;
-  background-color: #126fe9;
-  box-shadow: 0 0 0.5rem #45abd3;
+  background-color: #32A89C;
+  box-shadow: 0 0 0.5rem #44E3D3;
 }
 
 .movie-list {
@@ -110,7 +127,7 @@ function getGenreName(id) {
 .movie-card {
   width: 16.3rem;
   height: 30rem;
-  background-color: #9f97db;
+  background-color: #009688;
   margin-left: 0,3rem;
   
 }
@@ -118,7 +135,7 @@ function getGenreName(id) {
 .movie-card img {
   width: 99%;
   height: 20rem;
-  box-shadow: 0 0 0.3rem purple;
+  box-shadow: 0 0 0.3rem #00635A;
 
 }
 
@@ -131,7 +148,8 @@ function getGenreName(id) {
   font-weight: bold;
   line-height: 1.3rem;
   height: 3.2rem;
-  color:  rgb(94, 1, 122);
+  color:  #00635A;
+  font-family: fantasy;
 }
 
 .movie-genres {
@@ -144,7 +162,7 @@ function getGenreName(id) {
 }
 
 .movie-genres span {
-  background-color: #45abd3;
+  background-color: #32A89C;
   border-radius: 0.5rem;
   padding: 0.2rem 0.5rem;
   color: #0d0d0d;
@@ -154,7 +172,7 @@ function getGenreName(id) {
 
 .movie-genres span:hover {
   cursor: pointer;
-  background-color: #13759c;
-  box-shadow: 0 0 0.5rem #024763;
+  background-color: #32A89C;
+  box-shadow: 0 0 0.5rem #00635A;
 }
 </style>
