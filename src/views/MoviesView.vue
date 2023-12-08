@@ -8,7 +8,7 @@ const isLoading = ref(false)
 const movies = ref([]);
 
 onMounted(async () => {
-  const response = await api.get('genre/movie/list?language=pt-BR')
+  const response = await api.get('genre/movie/list?language=en-US')
   genres.value = response.data.genres
 })
 
@@ -19,7 +19,8 @@ const listMovies = async (genreId) => {
         params: {
             with_genres: genreId,
             language: 'en-US',
-            with_people: "212208"
+            with_people: '212208'
+           
         }
     });
     movies.value = response.data.results

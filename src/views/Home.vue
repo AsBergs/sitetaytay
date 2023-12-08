@@ -1,4 +1,5 @@
 <template>
+    
     <div>
       <h1 class="babe">Home</h1>
 </div>
