@@ -18,8 +18,8 @@
 header {
   height: 5rem;
   display: flex;
-  background-color: #292069;
-  color: #4C467C;
+  background-color: #00635A;
+  color: #009688;
   font-size: 1.2rem;
   padding-left: 2rem;
 }
