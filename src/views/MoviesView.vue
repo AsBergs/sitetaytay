@@ -19,7 +19,7 @@ const listMovies = async (genreId) => {
         params: {
             with_genres: genreId,
             language: 'en-US',
-            with_people: "212208"
+            
         }
     });
     movies.value = response.data.results

@@ -16,7 +16,7 @@ const listtvshows = async (genreId) => {
         params: {
             with_genres: genreId,
             language: 'en-US',
-            with_people: "212208"
+            
         }
     });
     tvshows.value = response.data.results
