@@ -5,7 +5,7 @@ import api from '@/plugins/axios'
 const genres = ref([])
 
 onMounted(async () => {
-  const response = await api.get('genre/tv/list?language=pt-BR')
+  const response = await api.get('genre/tv/list?language=en-US')
   genres.value = response.data.genres
 })
 
@@ -15,7 +15,7 @@ const listtvshows = async (genreId) => {
     const response = await api.get('discover/tv', {
         params: {
             with_genres: genreId,
-            language: 'pt-BR',
+            language: 'en-US',
             with_people: "212208"
         }
     });
@@ -26,19 +26,19 @@ const listtvshows = async (genreId) => {
 <template>
     <h1 class="title-bitch">TV Shows</h1>
     <ul class="genre-list">
-      <li v-for="genre in genres" :key="genre.id" class="genre-item">
+      <li v-for="genre in genres" :key="genre.id" @click="listtvshows(genre.id)" class="genre-item">
           {{ genre.name }}
-      </li>
+     </li> 
     </ul>
 
     <div class="tvshow-list">
   <div v-for="tvshow in tvshows" :key="tvshow.id" class="tvshow-card">
     
-    <img :src="`https://image.tmdb.org/t/p/w500${tvshows.poster_path}`" :alt="tvshows.name" />
+    <img :src="`https://image.tmdb.org/t/p/w500${tvshow.poster_path}`" :alt="tvshow.name" />
     <div class="tvshow-details">
-      <p class="tvshow-name">{{ tvshows.name }}</p>
-      <p class="tvshow-first-air-date">{{ tvshows.first_air_date }}</p>
-      <p class="tvshow-genres">{{ tvshows.genre_ids }}</p>
+      <p class="tvshow-name">{{ tvshow.name }}</p>
+      <p class="tvshow-first-air-date">{{ tvshow.first_air_date }}</p>
+      <p class="tvshow-genres">{{ tvshow.genre_ids }}</p>
     </div>
     
   </div>
